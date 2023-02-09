@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         User::factory(9)->create();
         
         $this->call(TagSeeder::class);
+
+    
         
 
     }
