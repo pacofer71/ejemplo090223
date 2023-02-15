@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,10 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(UserSeeder::class);
-        User::factory(9)->create();
-        
+       
         $this->call(TagSeeder::class);
-
+        
+        Storage::deleteDirectory('posts');
+        Storage::makeDirectory('posts');
+        $this->call(PostSeeder::class);
     
         
 

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::crate([
+        User::create([
             'name' => 'Francisco fernandez',
             'email' => 'pacofer71@gmail.com',
             'email_verified_at' => now(),
@@ -28,5 +28,6 @@ class UserSeeder extends Seeder
             'profile_photo_path' => null,
             'current_team_id' => null,
         ]);
+        User::factory(9)->create();
     }
 }
