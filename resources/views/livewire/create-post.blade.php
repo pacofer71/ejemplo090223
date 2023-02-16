@@ -19,9 +19,11 @@
             @endwire
             <x-form-group inline label="Etiquetas">
                 @foreach ($tags as $k => $v)
-                    <x-form-checkbox name="" label="{{ $v }}" value="{{ $k }}" />
+                    <x-form-checkbox name="etiquetas[]" label="{{ $v }}" value="{{ $k }}"
+                    :show-errors='false' wire:model.defer='etiquetas' />
                 @endforeach
             </x-form-group>
+            <x-jet-input-error for="etiquetas" />
             <div class="relative my-4">
                 @if ($imagen)
                     <img src="{{ $imagen->temporaryUrl() }}" class="object-cover object-center">
@@ -38,11 +40,13 @@
                 <input type="file" class="hidden" wire:model.defer="imagen" id="imgc" />
 
             </div>
+            <x-jet-input-error for="imagen" />
 
         </x-slot>
         <x-slot name="footer">
             <div class="flex flex-row-reverse">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button wire:click="guardar()" 
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     <i class="fas fa-save"></i> Guardar
                 </button>
                 <button wire:click="cancelar" 
