@@ -4,6 +4,7 @@
         ['titulo'=>'DashBoard', 'ruta'=>'dashboard', 'icono'=>'fas fa-gear mr-1'],
         ['titulo'=>'Mis Posts', 'ruta'=>'posts.show', 'icono'=>'fa-solid fa-address-card mr-1'],
         ['titulo'=>'Mis Posts Controller', 'ruta'=>'cposts.index', 'icono'=>'fa-solid fa-address-card mr-1'],
+        ['titulo'=>'Contáctanos', 'ruta'=>'contacto.form', 'icono'=>'fas fa-paper-plane mr-1'],
     ];
 @endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
@@ -21,7 +22,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @foreach($menus as $item)
-                    @if(auth()->user() || $item['ruta']=='inicio')
+                    @if(auth()->user() || $item['ruta']=='inicio' || $item['ruta']=='contacto.form')
                     <x-jet-nav-link href="{{ route($item['ruta']) }}" :active="request()->routeIs($item['ruta'])">
                         <i class="{{$item['icono']}}"></i>{{ $item['titulo'] }}
                     </x-jet-nav-link>

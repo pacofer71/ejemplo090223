@@ -51,11 +51,11 @@
                                 {{ $item->estado }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <button wire:click="editar({{ $item }})"
+                                <button wire:click="editar({{ $item->id }})"
                                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button wire:click="borrar({{ $item }})"
+                                <button wire:click="borrar({{ $item->id }})"
                                     class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                     <i class="fas fa-trash"></i>
                                 </button>

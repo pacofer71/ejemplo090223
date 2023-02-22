@@ -27,6 +27,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'external_provider',
+        'external_id',
+        'external_token',
+        'external_refresh_token'
     ];
 
     /**
@@ -58,4 +62,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

@@ -80,6 +80,8 @@ class PostController extends Controller
      */
     public function edit(Post $cpost)
     {
+        $this->authorize('update', $cpost);
+
         $tags = Tag::pluck('nombre', 'id')->toArray();
         $tagsSelected = $cpost->tags->pluck('id')->toArray();  // [1, 4, 5]
         return view('posts.edit', compact('cpost', 'tags', 'tagsSelected'));
@@ -94,6 +96,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $cpost)
     {
+
         $request->validate([
             'titulo'=>['required', 'string', 'min:3', 'unique:posts,titulo,'.$cpost->id],
             'contenido'=>['required', 'string', 'min:5'],
@@ -126,6 +129,8 @@ class PostController extends Controller
      */
     public function destroy(Post $cpost)
     {
+        $this->authorize('delete', $cpost);
+        
         Storage::delete($cpost->imagen);
         $cpost->delete();
         return redirect()->route('cposts.index')->with('info', 'Post Borrado');

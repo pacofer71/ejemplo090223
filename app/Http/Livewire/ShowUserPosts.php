@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,6 +14,7 @@ class ShowUserPosts extends Component
 {
     use WithPagination;
     use WithFileUploads;
+    use AuthorizesRequests;
 
     public string $buscar="", $campo="id", $orden="asc"; 
     public $imagen;
@@ -59,12 +61,16 @@ class ShowUserPosts extends Component
     }
 
     public function borrar(Post $post){
+        $this->authorize('delete', $post);
         Storage::delete($post->imagen);
         $post->delete();
         //$this->resetPage();
     }
 
     public function editar(Post $post){
+
+        $this->authorize('update', $post);
+
         $this->post=$post;
         $this->selectedTags=$post->tags->pluck('id')->toArray();
         $this->openEditar=true;
@@ -77,6 +83,7 @@ class ShowUserPosts extends Component
     }
 
     public function update(){
+        
         $this->validate([
             'post.titulo'=>['required', 'string', 'min:3', 'unique:posts,titulo,'.$this->post->id],
             'post.contenido'=>['required', 'string', 'min:5'],

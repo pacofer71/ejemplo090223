@@ -44,5 +44,11 @@
                 </x-jet-button>
             </div>
         </form>
+        <div class="mt-2 flex items-center justify-center">
+            <a href="{{route('github.redirect')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <i class="fa-brands fa-github mr-2"></i> Login with GitHub
+            </a>
+            
+        </div>
     </x-jet-authentication-card>
 </x-guest-layout>
